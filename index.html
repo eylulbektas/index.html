@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eylül Bektaş | Futbol Haberleri, Analiz &amp; Süper Lig Fikstürü</title>
+<meta name="description" content="Eylül Bektaş ile güncel futbol haberleri, Süper Lig fikstürü ve maç analizleri bir arada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch-dark:#0A2A1D;
+    --pitch:#0F3D28;
+    --pitch-light:#1F7A4D;
+    --chalk:#F4F1E5;
+    --chalk-dim:#DAD6C6;
+    --gold:#C9A227;
+    --gold-bright:#E4C246;
+    --ink:#0D1B14;
+    --red-card:#B3261E;
+    --line:rgba(244,241,229,0.14);
+    --shadow:0 20px 50px rgba(0,0,0,0.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--chalk);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    line-height:1.05;
+  }
+  .mono{ font-family:'Space Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{ padding:96px 0; position:relative; }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--pitch-light);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px; height:2px;
+    background:var(--gold);
+    display:inline-block;
+  }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head h2{ font-size:clamp(30px,4.2vw,48px); color:var(--ink); }
+  .section-head p{ color:#4b5850; margin-top:14px; font-size:17px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 28px;
+    border-radius:2px;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-gold{ background:var(--gold); color:var(--ink); }
+  .btn-gold:hover{ box-shadow:0 10px 24px rgba(201,162,39,0.4); }
+  .btn-outline{ border-color:var(--chalk); color:var(--chalk); }
+  .btn-outline:hover{ background:rgba(244,241,229,0.08); }
+  .btn-whatsapp{ background:#1FAE55; color:#fff; }
+  .btn-whatsapp:hover{ box-shadow:0 10px 24px rgba(31,174,85,0.45); }
+
+  /* ===== WHATSAPP FLOATING BUTTON (blinking) ===== */
+  .wa-float{
+    position:fixed;
+    top:18px;
+    right:20px;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#1FAE55;
+    color:#fff;
+    padding:12px 18px 12px 12px;
+    border-radius:50px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.28);
+    animation:wa-blink 1.8s ease-in-out infinite;
+    font-weight:700;
+    font-size:14px;
+  }
+  .wa-float svg{ width:26px; height:26px; flex-shrink:0; }
+  .wa-float .wa-text{ white-space:nowrap; }
+  @keyframes wa-blink{
+    0%,100%{ opacity:1; box-shadow:0 8px 24px rgba(0,0,0,0.28), 0 0 0 0 rgba(31,174,85,0.55); }
+    50%{ opacity:0.55; box-shadow:0 8px 24px rgba(0,0,0,0.28), 0 0 0 12px rgba(31,174,85,0); }
+  }
+  @media(max-width:560px){
+    .wa-float .wa-text{ display:none; }
+    .wa-float{ padding:12px; top:14px; right:14px; }
+  }
+
+  /* ===== HEADER / NAV ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:var(--pitch-dark);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 24px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{ display:flex; flex-direction:column; color:var(--chalk); }
+  .logo .name{ font-family:'Anton', sans-serif; font-size:24px; letter-spacing:1px; }
+  .logo .tag{ font-family:'Space Mono', monospace; font-size:10px; letter-spacing:3px; color:var(--gold); margin-top:2px; }
+  nav ul{ display:flex; gap:34px; }
+  nav a{
+    color:var(--chalk-dim); font-size:14px; font-weight:600;
+    letter-spacing:0.5px; text-transform:uppercase;
+    position:relative; padding-bottom:4px;
+  }
+  nav a::after{
+    content:""; position:absolute; left:0; bottom:0;
+    width:0; height:2px; background:var(--gold);
+    transition:width .2s ease;
+  }
+  nav a:hover::after{ width:100%; }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--chalk); font-size:26px; cursor:pointer; }
+  @media(max-width:860px){
+    nav{ display:none; }
+    nav.open{
+      display:block; position:absolute; top:100%; left:0; right:0;
+      background:var(--pitch-dark); border-top:1px solid var(--line);
+    }
+    nav.open ul{ flex-direction:column; gap:0; }
+    nav.open ul li{ border-bottom:1px solid var(--line); }
+    nav.open ul li a{ display:block; padding:16px 24px; }
+    .nav-toggle{ display:block; }
+  }
+
+  /* ===== TICKER ===== */
+  .ticker{
+    background:var(--gold); color:var(--ink);
+    overflow:hidden; white-space:nowrap;
+    border-bottom:1px solid var(--line);
+  }
+  .ticker-track{
+    display:inline-block;
+    padding:9px 0;
+    font-family:'Space Mono', monospace;
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    animation:ticker 32s linear infinite;
+  }
+  .ticker-track span{ margin-right:56px; }
+  @keyframes ticker{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    background:
+      radial-gradient(ellipse 700px 500px at 15% -10%, rgba(228,194,70,0.18), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 110% 10%, rgba(31,122,77,0.4), transparent 60%),
+      var(--pitch-dark);
+    color:var(--chalk);
+    padding:110px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, transparent, transparent 118px, rgba(244,241,229,0.035) 118px, rgba(244,241,229,0.035) 120px);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:50px; align-items:center;
+    position:relative; z-index:1;
+  }
+  .hero h1{
+    font-size:clamp(40px,6vw,72px);
+    margin-top:14px;
+  }
+  .hero h1 .accent{ color:var(--gold); }
+  .hero p.lede{
+    color:var(--chalk-dim); font-size:18px; max-width:520px; margin:22px 0 34px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    margin-top:56px; border-top:1px solid var(--line); padding-top:28px;
+    gap:20px;
+  }
+  .hero-stats .stat b{
+    font-family:'Space Mono', monospace; font-size:28px; color:var(--gold-bright); display:block;
+  }
+  .hero-stats .stat span{ font-size:12.5px; color:var(--chalk-dim); letter-spacing:0.5px; }
+
+  .scoreboard{
+    background:var(--pitch);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px;
+    box-shadow:var(--shadow);
+  }
+  .scoreboard-head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:2px;
+    color:var(--chalk-dim); text-transform:uppercase; margin-bottom:18px;
+    padding-bottom:14px; border-bottom:1px dashed var(--line);
+  }
+  .live-dot{ width:8px; height:8px; border-radius:50%; background:var(--red-card); display:inline-block; margin-right:6px; animation:pulse 1.4s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .score-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .score-row:last-child{ border-bottom:none; }
+  .score-team{ display:flex; align-items:center; gap:10px; color:var(--chalk); font-weight:700; font-size:14.5px; }
+  .badge{
+    width:30px; height:30px; border-radius:50%;
+    background:var(--gold); color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton', sans-serif; font-size:13px;
+  }
+  .score-num{ font-family:'Space Mono', monospace; font-size:18px; color:var(--gold-bright); font-weight:700; }
+  .score-min{ font-family:'Space Mono', monospace; font-size:11px; color:var(--chalk-dim); }
+
+  @media(max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-stats{ grid-template-columns:1fr 1fr; }
+  }
+
+  /* ===== NEWS ===== */
+  .news-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:26px;
+  }
+  .news-card{
+    background:#fff; border:1px solid rgba(13,27,20,0.08);
+    border-radius:4px; overflow:hidden;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .news-card:hover{ transform:translateY(-6px); box-shadow:0 18px 34px rgba(13,27,20,0.12); }
+  .news-media{
+    height:170px;
+    background:linear-gradient(135deg, var(--pitch) 0%, var(--pitch-light) 100%);
+    position:relative;
+    display:flex; align-items:flex-end; padding:16px;
+  }
+  .news-tag{
+    background:var(--gold); color:var(--ink); font-size:11px; font-weight:800;
+    letter-spacing:1px; text-transform:uppercase; padding:5px 10px; border-radius:2px;
+  }
+  .news-body{ padding:22px; }
+  .news-body .date{ font-family:'Space Mono', monospace; font-size:11.5px; color:#7a8a80; margin-bottom:8px; display:block; }
+  .news-body h3{ font-size:19px; text-transform:none; letter-spacing:0; font-family:'Manrope',sans-serif; font-weight:800; margin-bottom:10px; }
+  .news-body p{ font-size:14.5px; color:#4b5850; }
+  @media(max-width:900px){ .news-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:620px){ .news-grid{ grid-template-columns:1fr; } }
+
+  /* ===== FIXTURE ===== */
+  .fixture-section{ background:var(--pitch-dark); color:var(--chalk); }
+  .fixture-section .section-head p{ color:var(--chalk-dim); }
+  .fixture-note{
+    font-family:'Space Mono', monospace; font-size:12px; color:var(--gold);
+    border:1px dashed rgba(201,162,39,0.5); padding:10px 14px; border-radius:4px;
+    display:inline-block; margin-bottom:30px;
+  }
+  .fixture-table{
+    width:100%; border-collapse:collapse; background:var(--pitch);
+    border-radius:6px; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .fixture-table th{
+    text-align:left; font-family:'Space Mono', monospace; font-size:11.5px;
+    letter-spacing:1.5px; text-transform:uppercase; color:var(--gold);
+    padding:16px 18px; border-bottom:1px solid var(--line);
+  }
+  .fixture-table td{
+    padding:16px 18px; border-bottom:1px solid var(--line); font-size:14.5px;
+  }
+  .fixture-table tr:last-child td{ border-bottom:none; }
+  .fixture-table .teams{ font-weight:700; }
+  .fixture-table .vs{ color:var(--gold); margin:0 8px; font-family:'Space Mono', monospace; }
+  .pill{
+    display:inline-block; padding:4px 10px; border-radius:20px;
+    font-family:'Space Mono', monospace; font-size:11px; background:rgba(244,241,229,0.08); color:var(--chalk-dim);
+  }
+  .fixture-table-wrap{ overflow-x:auto; }
+
+  /* ===== ANALYSIS / COUPONS ===== */
+  .analysis-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  .analysis-card{
+    background:#fff; border:1px solid rgba(13,27,20,0.08); border-radius:4px; padding:26px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .analysis-top{ display:flex; justify-content:space-between; align-items:center; }
+  .analysis-match{ font-family:'Anton', sans-serif; font-size:21px; }
+  .confidence{
+    font-family:'Space Mono', monospace; font-size:11px; padding:5px 10px; border-radius:20px;
+    background:rgba(31,122,77,0.12); color:var(--pitch-light); font-weight:700; letter-spacing:1px;
+  }
+  .analysis-card p{ color:#4b5850; font-size:14.5px; }
+  .analysis-meta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
+  .analysis-meta span{
+    font-family:'Space Mono', monospace; font-size:11.5px; background:var(--chalk); border:1px solid rgba(13,27,20,0.1);
+    padding:5px 10px; border-radius:4px; color:#3a463f;
+  }
+  @media(max-width:760px){ .analysis-grid{ grid-template-columns:1fr; } }
+  .disclaimer-box{
+    margin-top:36px; padding:18px 20px; border-left:3px solid var(--red-card);
+    background:rgba(179,38,30,0.05); font-size:13.5px; color:#5c4640; border-radius:2px;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testi-section{ background:#F0EDE0; }
+  .testi-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .testi-card{
+    background:#fff; border-radius:4px; padding:26px;
+    border:1px solid rgba(13,27,20,0.08);
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .stars{ color:var(--gold); font-size:15px; letter-spacing:2px; }
+  .testi-card p{ font-size:14.5px; color:#3a463f; }
+  .testi-who{ display:flex; align-items:center; gap:12px; margin-top:auto; padding-top:10px; border-top:1px solid rgba(13,27,20,0.06); }
+  .avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--pitch); color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton', sans-serif; font-size:15px;
+  }
+  .testi-who .who-name{ font-weight:700; font-size:13.5px; }
+  .testi-who .who-loc{ font-size:12px; color:#7a8a80; }
+  @media(max-width:900px){ .testi-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:620px){ .testi-grid{ grid-template-columns:1fr; } }
+
+  /* ===== RESPONSIBLE GAMBLING BANNER ===== */
+  .responsible{
+    background:var(--ink); color:var(--chalk-dim);
+    padding:44px 0; text-align:center;
+  }
+  .responsible .wrap{ max-width:760px; }
+  .responsible h3{ color:var(--chalk); font-size:22px; margin-bottom:12px; letter-spacing:0.5px; }
+  .responsible p{ font-size:14px; }
+  .responsible .age{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:44px; height:44px; border:2px solid var(--gold); color:var(--gold);
+    border-radius:50%; font-family:'Anton', sans-serif; font-size:15px; margin-bottom:16px;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:start; }
+  .contact-card{
+    background:var(--pitch-dark); color:var(--chalk); padding:36px; border-radius:6px;
+  }
+  .contact-card h3{ font-size:24px; margin-bottom:16px; }
+  .contact-line{ display:flex; align-items:center; gap:12px; margin:16px 0; font-size:15px; }
+  .contact-line svg{ width:20px; height:20px; color:var(--gold); flex-shrink:0; }
+  .social-row{ display:flex; gap:12px; margin-top:24px; }
+  .social-row a{
+    width:40px; height:40px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:14px;
+  }
+  form{ display:flex; flex-direction:column; gap:14px; }
+  form input, form textarea{
+    padding:14px 16px; border:1px solid rgba(13,27,20,0.15); border-radius:4px;
+    font-family:'Manrope', sans-serif; font-size:14.5px; background:#fff;
+  }
+  form textarea{ min-height:110px; resize:vertical; }
+  form label{ font-size:12.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#4b5850; margin-bottom:-8px; }
+
+  /* ===== FOOTER ===== */
+  footer{ background:var(--ink); color:var(--chalk-dim); padding:50px 0 26px; }
+  .footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:40px; padding-bottom:36px; border-bottom:1px solid var(--line); }
+  .footer-grid h4{ color:var(--chalk); font-size:13px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:16px; font-family:'Space Mono', monospace; }
+  .footer-grid li{ margin-bottom:10px; font-size:14px; }
+  .footer-grid li a:hover{ color:var(--gold); }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:22px; font-size:12.5px; flex-wrap:wrap; gap:10px; }
+  @media(max-width:760px){
+    .footer-grid, .contact-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/905302914944" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp'tan yaz">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.481L4 29l7.72-1.865A11.93 11.93 0 0 0 16 27c6.628 0 12-5.373 12-12S22.629 3 16.001 3zm0 21.6c-2.02 0-3.899-.59-5.481-1.605l-.393-.242-4.59 1.109 1.129-4.47-.257-.407A9.56 9.56 0 0 1 6.4 15c0-5.302 4.298-9.6 9.601-9.6 5.302 0 9.6 4.298 9.6 9.6 0 5.303-4.298 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.842-1.97-.938-.264-.096-.456-.144-.648.144-.192.288-.744.938-.912 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.13-.129.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.648-1.564-.888-2.142-.234-.563-.472-.486-.648-.495l-.552-.01c-.192 0-.504.072-.768.36-.264.288-1.008.984-1.008 2.4 0 1.416 1.032 2.784 1.176 2.976.144.192 2.03 3.1 4.92 4.348.687.297 1.223.474 1.641.607.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>
+  <span class="wa-text">WhatsApp'tan Yaz</span>
+</a>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-row">
+    <a href="#top" class="logo">
+      <span class="name">EYLÜL BEKTAŞ</span>
+      <span class="tag">FUTBOL · ANALİZ · KUPON</span>
+    </a>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="#haberler">Haberler</a></li>
+        <li><a href="#fikstur">Fikstür</a></li>
+        <li><a href="#analizler">Analizler</a></li>
+        <li><a href="#yorumlar">Yorumlar</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç">☰</button>
+  </div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>⚽ SÜPER LİG YENİ SEZON HEYECANI BAŞLADI</span>
+      <span>📊 HAFTALIK MAÇ ANALİZLERİ YAYINDA</span>
+      <span>📱 WHATSAPP'TAN ANLIK BİLDİRİM İÇİN YAZIN: +90 530 291 49 44</span>
+      <span>🏆 TRANSFER SEZONU HABERLERİ GÜNCEL</span>
+      <span>⚽ SÜPER LİG YENİ SEZON HEYECANI BAŞLADI</span>
+      <span>📊 HAFTALIK MAÇ ANALİZLERİ YAYINDA</span>
+      <span>📱 WHATSAPP'TAN ANLIK BİLDİRİM İÇİN YAZIN: +90 530 291 49 44</span>
+      <span>🏆 TRANSFER SEZONU HABERLERİ GÜNCEL</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--gold)">2026-2027 SEZONU</div>
+      <h1>FUTBOLU<br><span class="accent">DOĞRU</span> OKU.</h1>
+      <p class="lede">Eylül Bektaş; güncel Süper Lig haberleri, haftalık fikstür ve maç öncesi analizleri tek sayfada topluyor. Sahaya çıkmadan önce doğru bilgiyle hazırlan.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/905302914944" target="_blank" rel="noopener" class="btn btn-whatsapp">WhatsApp'tan Ulaş</a>
+        <a href="#analizler" class="btn btn-outline">Analizleri Gör</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>250+</b><span>Yayınlanan Haber</span></div>
+        <div class="stat"><b>18</b><span>Süper Lig Takımı</span></div>
+        <div class="stat"><b>7/24</b><span>WhatsApp Destek</span></div>
+      </div>
+    </div>
+    <div class="scoreboard">
+      <div class="scoreboard-head">
+        <span><span class="live-dot"></span>CANLI SKOR TAKİBİ</span>
+        <span>6. HAFTA</span>
+      </div>
+      <div class="score-row">
+        <div class="score-team"><span class="badge">GS</span> Galatasaray</div>
+        <div class="score-num">2</div>
+      </div>
+      <div class="score-row">
+        <div class="score-team"><span class="badge">FB</span> Fenerbahçe</div>
+        <div class="score-num">1</div>
+      </div>
+      <div class="score-row" style="border-bottom:none; padding-top:20px;">
+        <span class="score-min">72' — İkinci Yarı</span>
+        <span class="pill">Örnek Gösterim</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="haberler">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Gündem</div>
+      <h2>Güncel Futbol Haberleri</h2>
+      <p>Süper Lig ve Türk futbolundan öne çıkan başlıklar, transfer gelişmeleri ve maç sonrası değerlendirmeler.</p>
+    </div>
+    <div class="news-grid">
+      <article class="news-card">
+        <div class="news-media"><span class="news-tag">Süper Lig</span></div>
+        <div class="news-body">
+          <span class="date">28 Ağustos 2026</span>
+          <h3>Zirve yarışında 6. hafta öncesi puan durumu netleşiyor</h3>
+          <p>Sezonun ilk haftalarında alınan sonuçlar zirve mücadelesinin şekillenmesinde belirleyici oluyor.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-media"><span class="news-tag">Transfer</span></div>
+        <div class="news-body">
+          <span class="date">27 Ağustos 2026</span>
+          <h3>Yaz transfer döneminde son hafta hareketliliği</h3>
+          <p>Transfer penceresinin kapanmasına sayılı gün kala kulüpler kadrolarını şekillendirmeye devam ediyor.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-media"><span class="news-tag">Analiz</span></div>
+        <div class="news-body">
+          <span class="date">26 Ağustos 2026</span>
+          <h3>Derbi haftası öncesi form durumu karşılaştırması</h3>
+          <p>Yaklaşan derbi haftası öncesinde takımların son maçlardaki performansını mercek altına alıyoruz.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-media"><span class="news-tag">Milli Takım</span></div>
+        <div class="news-body">
+          <span class="date">24 Ağustos 2026</span>
+          <h3>Eylül ayı milli maç arasına doğru kadro tartışmaları</h3>
+          <p>21 Eylül - 7 Ekim arasındaki milli maç arası öncesinde aday kadro senaryoları konuşuluyor.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-media"><span class="news-tag">İstatistik</span></div>
+        <div class="news-body">
+          <span class="date">23 Ağustos 2026</span>
+          <h3>Sezonun en golcü açılışını hangi takım yaptı?</h3>
+          <p>İlk haftaların gol istatistiklerini takım bazında karşılaştırdık, öne çıkanları derledik.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-media"><span class="news-tag">Kulüpler</span></div>
+        <div class="news-body">
+          <span class="date">22 Ağustos 2026</span>
+          <h3>Alt sıralardaki takımlar için kritik hafta</h3>
+          <p>Ligin alt bölgesinde mücadele eden ekipler için önümüzdeki haftalar puan farkını kapatma şansı sunuyor.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FIXTURE -->
+<section class="fixture-section" id="fikstur">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Takvim</div>
+      <h2>Süper Lig Fikstürü</h2>
+      <p>2026-2027 sezonu Trendyol Süper Lig'de öne çıkan haftalık karşılaşmalar.</p>
+    </div>
+    <div class="fixture-note">ⓘ Aşağıdaki tablo örnek bir gösterimdir — canlı yayına aldığınızda TFF'nin güncel fikstürüyle senkronize etmeniz gerekir.</div>
+    <div class="fixture-table-wrap">
+      <table class="fixture-table">
+        <thead>
+          <tr>
+            <th>Tarih</th>
+            <th>Saat</th>
+            <th>Karşılaşma</th>
+            <th>Stat</th>
+            <th>Hafta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">12 Eylül 2026</td>
+            <td class="mono">20:00</td>
+            <td class="teams">Galatasaray <span class="vs">vs</span> Göztepe</td>
+            <td>RAMS Park</td>
+            <td><span class="pill">6. Hafta</span></td>
+          </tr>
+          <tr>
+            <td class="mono">12 Eylül 2026</td>
+            <td class="mono">17:30</td>
+            <td class="teams">Fenerbahçe <span class="vs">vs</span> Kasımpaşa</td>
+            <td>Chobani Stadyumu</td>
+            <td><span class="pill">6. Hafta</span></td>
+          </tr>
+          <tr>
+            <td class="mono">13 Eylül 2026</td>
+            <td class="mono">19:00</td>
+            <td class="teams">Beşiktaş <span class="vs">vs</span> Gaziantep FK</td>
+            <td>Tüpraş Stadyumu</td>
+            <td><span class="pill">6. Hafta</span></td>
+          </tr>
+          <tr>
+            <td class="mono">13 Eylül 2026</td>
+            <td class="mono">20:00</td>
+            <td class="teams">Trabzonspor <span class="vs">vs</span> Alanyaspor</td>
+            <td>Papara Park</td>
+            <td><span class="pill">6. Hafta</span></td>
+          </tr>
+          <tr>
+            <td class="mono">14 Eylül 2026</td>
+            <td class="mono">17:00</td>
+            <td class="teams">Başakşehir <span class="vs">vs</span> Kayserispor</td>
+            <td>Başakşehir Fatih Terim</td>
+            <td><span class="pill">6. Hafta</span></td>
+          </tr>
+          <tr>
+            <td class="mono">14 Eylül 2026</td>
+            <td class="mono">20:00</td>
+            <td class="teams">Samsunspor <span class="vs">vs</span> Konyaspor</td>
+            <td>Samsun 19 Mayıs</td>
+            <td><span class="pill">6. Hafta</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYSIS / COUPONS -->
+<section id="analizler">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Maç Öncesi</div>
+      <h2>Haftanın Analizleri</h2>
+      <p>Form durumu, istatistik ve saha gözlemlerine dayanan maç yorumları. Bu içerikler bilgilendirme amaçlıdır, kesin sonuç garantisi vermez.</p>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-card">
+        <div class="analysis-top">
+          <span class="analysis-match">Galatasaray - Göztepe</span>
+          <span class="confidence">Analist Görüşü: Yüksek</span>
+        </div>
+        <p>Ev sahibi ekip son 5 iç saha maçında istikrarlı bir görüntü çiziyor. Rakibin deplasman istatistikleri de değerlendirmeye katıldı.</p>
+        <div class="analysis-meta">
+          <span>MS: 1</span>
+          <span>KG: Var ihtimali</span>
+          <span>2.5 ÜST eğilimi</span>
+        </div>
+      </div>
+      <div class="analysis-card">
+        <div class="analysis-top">
+          <span class="analysis-match">Fenerbahçe - Kasımpaşa</span>
+          <span class="confidence">Analist Görüşü: Orta</span>
+        </div>
+        <p>İki takımın son karşılaşmalarındaki gol ortalamaları dengeli bir mücadeleye işaret ediyor.</p>
+        <div class="analysis-meta">
+          <span>MS: 1 / X</span>
+          <span>Çifte Şans</span>
+          <span>Toplam gol takibi</span>
+        </div>
+      </div>
+      <div class="analysis-card">
+        <div class="analysis-top">
+          <span class="analysis-match">Trabzonspor - Alanyaspor</span>
+          <span class="confidence">Analist Görüşü: Orta</span>
+        </div>
+        <p>Ev sahibi kadro derinliği ile öne çıkarken, deplasman ekibinin karşı atak etkinliği maçın kaderini belirleyebilir.</p>
+        <div class="analysis-meta">
+          <span>MS: 1</span>
+          <span>Korner takibi</span>
+          <span>İlk yarı/maç sonu</span>
+        </div>
+      </div>
+      <div class="analysis-card">
+        <div class="analysis-top">
+          <span class="analysis-match">Başakşehir - Kayserispor</span>
+          <span class="confidence">Analist Görüşü: Düşük</span>
+        </div>
+        <p>Sezon başı kadro değişiklikleri iki takımda da form belirsizliği yaratıyor, temkinli bir yaklaşım öneriyoruz.</p>
+        <div class="analysis-meta">
+          <span>MS: Belirsiz</span>
+          <span>Alt/Üst dengeli</span>
+          <span>Kart sayısı yüksek</span>
+        </div>
+      </div>
+    </div>
+    <div class="disclaimer-box">
+      ⚠️ <strong>Uyarı:</strong> Bu sayfadaki analizler ve tahminler yalnızca bilgilendirme ve eğlence amaçlıdır, kazanç garantisi anlamına gelmez ve yatırım/bahis tavsiyesi olarak yorumlanmamalıdır. Bahis, kayıp riski taşıyan ve bağımlılık yapabilen bir aktivitedir. 18 yaşından küçükler bahis oynayamaz. Lütfen bilinçli ve sorumlu şekilde hareket edin.
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="yorumlar">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Topluluk</div>
+      <h2>Takipçilerimiz Ne Diyor?</h2>
+      <p>Eylül Bektaş'ı takip eden futbolseverlerden birkaç yorum.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Maç öncesi analizleri her hafta düzenli takip ediyorum, oldukça derli toplu hazırlanmış."</p>
+        <div class="testi-who">
+          <div class="avatar">M</div>
+          <div><div class="who-name">Mert K.</div><div class="who-loc">İstanbul</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Fikstür ve haberler kısmı çok pratik, tek sayfada her şeye ulaşabiliyorum."</p>
+        <div class="testi-who">
+          <div class="avatar">S</div>
+          <div><div class="who-name">Selin A.</div><div class="who-loc">İzmir</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★☆</div>
+        <p>"WhatsApp üzerinden hızlıca soru sorabiliyorum, dönüşler de gayet hızlı oluyor."</p>
+        <div class="testi-who">
+          <div class="avatar">B</div>
+          <div><div class="who-name">Burak T.</div><div class="who-loc">Bursa</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Haberler güncel ve akıcı bir dille yazılmış, sitede vakit geçirmek keyifli."</p>
+        <div class="testi-who">
+          <div class="avatar">E</div>
+          <div><div class="who-name">Ece Y.</div><div class="who-loc">Ankara</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★☆</div>
+        <p>"Tasarım sade ve mobilde de rahat okunuyor, uzun süredir takip ediyorum."</p>
+        <div class="testi-who">
+          <div class="avatar">C</div>
+          <div><div class="who-name">Caner D.</div><div class="who-loc">Antalya</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Analizlerdeki istatistik yaklaşımı işime çok yarıyor, teşekkürler Eylül Bektaş ekibi."</p>
+        <div class="testi-who">
+          <div class="avatar">D</div>
+          <div><div class="who-name">Deniz R.</div><div class="who-loc">Adana</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESPONSIBLE GAMBLING -->
+<section class="responsible">
+  <div class="wrap">
+    <div class="age">18+</div>
+    <h3>Sorumlu ve Bilinçli Davranın</h3>
+    <p>Bu site futbol haberleri ve maç analizleri paylaşır; hiçbir içerik kazanç garantisi taşımaz. Bahis alışkanlığınızın kontrolden çıktığını düşünüyorsanız bir uzmandan destek almaktan çekinmeyin.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="iletisim">
+  <div class="wrap contact-grid">
+    <div class="contact-card">
+      <div class="eyebrow" style="color:var(--gold)">İletişim</div>
+      <h3>Bize Ulaşın</h3>
+      <p style="color:var(--chalk-dim); font-size:14.5px;">Sorularınız için WhatsApp üzerinden anlık olarak yazabilirsiniz.</p>
+      <div class="contact-line">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2h-1C9.163 19 5 14.837 5 9V8"/></svg>
+        <span>+90 530 291 49 44</span>
+      </div>
+      <div class="contact-line">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <span>iletisim@eylulbektas.com</span>
+      </div>
+      <div class="contact-line">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>Türkiye</span>
+      </div>
+      <a href="https://wa.me/905302914944" target="_blank" rel="noopener" class="btn btn-whatsapp" style="margin-top:16px;">Hemen WhatsApp'tan Yaz</a>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="X">X</a>
+        <a href="#" aria-label="YouTube">YT</a>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow">Mesaj Gönder</div>
+      <h2 style="font-size:28px; margin-bottom:20px;">Bir Mesaj Bırakın</h2>
+      <form onsubmit="return false;">
+        <label>Ad Soyad</label>
+        <input type="text" placeholder="Adınız Soyadınız" required>
+        <label>E-posta</label>
+        <input type="email" placeholder="ornek@eposta.com" required>
+        <label>Mesaj</label>
+        <textarea placeholder="Mesajınızı yazın..." required></textarea>
+        <button type="submit" class="btn btn-gold" style="margin-top:6px;">Gönder</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;">
+          <span class="name" style="font-size:20px;">EYLÜL BEKTAŞ</span>
+        </div>
+        <p style="font-size:14px; max-width:340px; color:var(--chalk-dim);">Futbol haberleri, Süper Lig fikstürü ve maç analizlerini bir arada sunan içerik platformu.</p>
+      </div>
+      <div>
+        <h4>Bağlantılar</h4>
+        <ul>
+          <li><a href="#haberler">Haberler</a></li>
+          <li><a href="#fikstur">Fikstür</a></li>
+          <li><a href="#analizler">Analizler</a></li>
+          <li><a href="#yorumlar">Yorumlar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>İletişim</h4>
+        <ul>
+          <li><a href="https://wa.me/905302914944">WhatsApp</a></li>
+          <li><a href="mailto:iletisim@eylulbektas.com">E-posta</a></li>
+          <li><a href="#iletisim">İletişim Formu</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Eylül Bektaş. Tüm hakları saklıdır.</span>
+      <span>18+ · Sorumlu davranın. Bu site kazanç garantisi vermez.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+  navToggle.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+  });
+  document.querySelectorAll('#mainNav a').forEach(link=>{
+    link.addEventListener('click', ()=> mainNav.classList.remove('open'));
+  });
+</script>
+</body>
+</html>
